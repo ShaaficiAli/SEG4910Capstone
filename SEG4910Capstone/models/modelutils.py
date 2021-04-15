@@ -55,7 +55,7 @@ def createDataset(NumberBenignRecords,NumberMalicousRecords,NameFinalDataset):
 def getModelData(trainingsplit=[0.7,0.3],DataCSV="../Data Scripts/Datasets/FinalDataset.csv"):
     spark = SparkSession.builder.master("local").appName("SEG CAPSTONE").config(conf=SparkConf()).getOrCreate()
     data = spark.read.options(inferSchema='True',delimiter=',',header='True')\
-       .csv(Data)
+       .csv(DataCSV)
     data = data.drop('_c0','Website')
     train, test = data.randomSplit(trainingsplit,seed=11)
     print("{0} training examples and {1} test examples.".format(train.count(), test.count()))
