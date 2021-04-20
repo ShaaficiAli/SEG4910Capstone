@@ -1,4 +1,7 @@
-
+'''
+Creates a Decision tree classification model
+Can be found at https://spark.apache.org/docs/latest/ml-classification-regression.html#decision-tree-classifier
+'''
 from pyspark.ml.classification import DecisionTreeClassifier
 
 

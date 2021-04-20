@@ -1,3 +1,7 @@
+'''
+Creates a linear support vector machine classification model
+Can be found at https://spark.apache.org/docs/latest/ml-classification-regression.html#linear-support-vector-machine
+'''
 from pyspark.ml.classification import LinearSVC
 import modelutils
 
