@@ -1,7 +1,9 @@
+'''
+Creates a gradient boosted tree classification model
+Can be found athttps://spark.apache.org/docs/latest/ml-classification-regression.html#gradient-boosted-tree-classifier
+'''
 
 from pyspark.ml.classification import GBTClassifier
-
-
 
 import modelutils
 

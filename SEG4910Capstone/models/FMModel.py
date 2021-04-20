@@ -1,3 +1,7 @@
+'''
+Creates a factorization machines classification model
+Can be found at https://spark.apache.org/docs/latest/ml-classification-regression.html#factorization-machines-classifier
+'''
 from pyspark.ml.classification import FMClassifier
 
 import modelutils

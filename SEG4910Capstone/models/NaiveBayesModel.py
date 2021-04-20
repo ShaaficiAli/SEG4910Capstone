@@ -1,3 +1,7 @@
+'''
+Creates a Naive bayes classification model
+Can be found at https://spark.apache.org/docs/latest/ml-classification-regression.html#naive-bayes
+'''
 
 from pyspark.ml.classification import NaiveBayes
 
