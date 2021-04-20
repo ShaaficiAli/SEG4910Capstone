@@ -13,32 +13,32 @@ Structure of repository:
 Inside SEG4910Capstone folder is where our code for running our models is.
 
 
-**Data Scripts:
+**Data Scripts:**
 
 A folder that contains datasets used and generated as well as the scripts that were used to generate them
 
-**Docs:
+**Docs:**
 
 A folder for documents that will be used in the next semester
 
-**models:
+**Models:**
 
 A folder containing all the models that are used as well as our 
 model utils library that helps model/model data creation and evaluation
 
-**notebooks:
+**Notebooks:**
 
 A folder for jupyter notebooks that will be used next semester
 
-**References:
+**References:**
 
 A folder that will contain references used next semester
 
-**reports:
+**Reports:**
 
 A folder containing reports that will be used next semester
 
-**Relevant folders for this semester are:
+**Relevant folders for this semester are:**
 
 Data scripts and models
 
