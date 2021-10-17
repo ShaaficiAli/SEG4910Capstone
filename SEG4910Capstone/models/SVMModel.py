@@ -4,7 +4,7 @@ Can be found at https://spark.apache.org/docs/latest/ml-classification-regressio
 '''
 from pyspark.ml.classification import LinearSVC
 import modelutils
-
+import pickle
 train,test,Traindf, Testdf, data = modelutils.getModelData([0.7,0.3])
  
 SVM  = LinearSVC(maxIter=10,
@@ -15,3 +15,5 @@ SVM  = LinearSVC(maxIter=10,
 lscvModel = SVM.fit(Traindf)
 svmeval = modelutils.getEvaluationMetrics(lscvModel, Testdf)
 
+with open('SVMModel_pickle', 'wb') as f:
+	picke.dump(lscvModel, f)

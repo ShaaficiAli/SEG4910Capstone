@@ -7,6 +7,8 @@ from pyspark.ml.classification import LogisticRegression
 import modelutils
 
 import os
+
+import pickle
 train,test,Traindf, Testdf, data = modelutils.getModelData([0.7,0.3])
 
 
@@ -18,4 +20,7 @@ Binomial = LogisticRegression(labelCol="Label",
                     elasticNetParam=0.8)
 bi_model = Binomial.fit(Traindf)
 bieval = modelutils.getEvaluationMetrics(bi_model, Testdf)
+
+with open('BinomialRegression_pickle', 'wb') as f:
+	picke.dump(bi_model, f)
 

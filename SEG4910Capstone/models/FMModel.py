@@ -6,6 +6,8 @@ from pyspark.ml.classification import FMClassifier
 
 import modelutils
 
+import pickle
+
 train,test,Traindf, Testdf, data = modelutils.getModelData([0.7,0.3])
  
 FM = FMClassifier(labelCol="Label",
@@ -14,3 +16,6 @@ FM = FMClassifier(labelCol="Label",
 
 FMModel = FM.fit(Traindf)
 fmeval = modelutils.getEvaluationMetrics(FMModel, Testdf)
+
+with open('FMModel_pickle', 'wb') as f:
+	picke.dump(FMModel, f)

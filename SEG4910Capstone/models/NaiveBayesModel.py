@@ -8,6 +8,7 @@ from pyspark.ml.classification import NaiveBayes
 import modelutils
 
 import os
+import pickle
 train,test,Traindf, Testdf, data = modelutils.getModelData([0.7,0.3])
 
 nb =  NaiveBayes(labelCol="Label",
@@ -15,3 +16,5 @@ nb =  NaiveBayes(labelCol="Label",
 nb_model = nb.fit(Traindf)
 nbeval = modelutils.getEvaluationMetrics(nb_model, Testdf)
 
+with open('NaiveBayesModel_pickle', 'wb') as f:
+	picke.dump(nb_model, f)
