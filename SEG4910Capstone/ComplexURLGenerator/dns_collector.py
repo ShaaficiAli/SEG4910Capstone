@@ -1,29 +1,61 @@
-import dns.resolver
 import random, time
 import pandas as pd
 import re
+from scapy.all import DNS, DNSQR, IP, sr1, UDP
+import subprocess
+import urllib
+import requests 
+#exclude a.root-servers.net
+#exclude .html
 
-dns.resolver.nameservers = ['localhost']
-csv = 'complex_links[0-4992].csv'
+#url_request python package
+#prequest make get requests
 
-df = pd.read_csv('complex_links[0-4992].csv')
+#x=requests.get(url)
+#print(x.status_code)
+
+csv = 'complex_links.csv'
+
+def dns_query_specific_nameserver(query, nameserver="1.1.1.1", qtype="AAAA"):
+    """
+    Query a specific nameserver for:
+    - An IPv4 address for a given hostname (qtype="A")
+    - An IPv6 address for a given hostname (qtype="AAAA")
+    
+    Returns the IP address as a string
+    """
+    process = subprocess.Popen(["nslookup", query], stdout=subprocess.PIPE)
+
 
 def ping(url):
-
-	types = ['NS', 'A', 'AAAA', 'MX']
-	rt = random.choice(types)
-
 	try:
-		dns.resolver.query(url, rt)
-	except dns.resolver.NXDOMAIN:
+		if (url != ''):
+			print(url)
+			x = requests.get(url,timeout=10)
+			print(x.status_code)
+			#print(x.text+'\n')
+	except requests.exceptions.Timeout:
+		print("TIMEOUT")
 		pass
-	except dns.resolver.NoAnswer:
+	except requests.exceptions.ConnectionError:
 		pass
-	except dns.resolver.Timeout:
+	except UnicodeDecodeError:
 		pass
-	except dns.resolver.YXDOMAIN:
+	except UnicodeError:
 		pass
-	except dns.resolver.NoNameservers:
+	except AttributeError:
+		pass
+	except requests.exceptions.InvalidSchema:
+		pass
+	except requests.exceptions.MissingSchema:
+		pass
+	except requests.exceptions.ContentDecodingError:
+		pass
+	except requests.exceptions.ChunkedEncodingError:
+		pass
+	except requests.exceptions.TooManyRedirects:
+		pass
+	except requests.exceptions.InvalidURL:
 		pass
 
 def csv_reader(csv):
@@ -35,6 +67,8 @@ def csv_reader(csv):
 		myList = item[2].strip('][').split(', ')
 		
 		for i in myList:
-				url = i.replace("'","")
-				ping(url)
+			url = i.replace("'","")
+			ping(url)
 
+
+csv_reader('complex_links.csv')
