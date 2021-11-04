@@ -34,11 +34,14 @@ def ping(url):
 	try:
 		if (url != ''):
 			print(url)
-			x = requests.get(url,timeout=10)
+			x = requests.get(url,timeout=1)
 			print(x.status_code)
 			#print(x.text+'\n')
+
 	except requests.exceptions.Timeout:
 		print("TIMEOUT")
+		pass
+	except requests.exceptions.MissingSchema:
 		pass
 	except requests.exceptions.ConnectionError:
 		pass
