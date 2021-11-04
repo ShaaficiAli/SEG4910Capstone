@@ -8,7 +8,13 @@ import modelutils
 
 import os
 
-import pickle
+## pip install mleap
+import mleap.pyspark
+from mleap.pyspark.spark_support import SimpleSparkSerializer
+
+from pyspark.sql import SparkSession
+
+spark = (SparkSession.builder.config(
 train,test,Traindf, Testdf, data = modelutils.getModelData([0.7,0.3])
 
 
@@ -21,6 +27,6 @@ Binomial = LogisticRegression(labelCol="Label",
 bi_model = Binomial.fit(Traindf)
 bieval = modelutils.getEvaluationMetrics(bi_model, Testdf)
 
-with open('BinomialRegression_pickle', 'wb') as f:
-	picke.dump(bi_model, f)
+bi_model.serializeToBundle("jar:file:binomial_regression.zip", bi_model.transform(Traindf))
+
 

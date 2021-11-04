@@ -59,6 +59,15 @@ def get_links(url):
 	except requests.exceptions.TooManyRedirects:
 		print('Handle REDIRECT Exception')
 		return [],[]
+    	except requests.exceptions.InvalidURL:
+        	print('Handle INVALID URL Exception')
+        	return [],[]
+    	except requests.exceptions.ChunkedEncodingError:
+        	print('Handle CHUNKED ENCODING ERROR Exception')
+        	return [],[]
+    	except requests.exceptions.ContentDecodingError:
+        	print('Handle CHUNKED ENCODING ERROR Exception')
+        	return [],[]
 
 	data = page.text
 	soup = BeautifulSoup(data)
