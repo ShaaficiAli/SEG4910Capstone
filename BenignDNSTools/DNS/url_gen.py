@@ -24,6 +24,9 @@ url_list = pd.read_csv('top1m.csv')
 url_list = url_list.drop(url_list.columns[0], axis=1)
 
 
+url_list = url_list[(4992+17413):]
+
+
 #@timeout(2, os.strerror(errno.ETIMEDOUT))
 def get_links(url):
 	'''
@@ -59,15 +62,15 @@ def get_links(url):
 	except requests.exceptions.TooManyRedirects:
 		print('Handle REDIRECT Exception')
 		return [],[]
-    	except requests.exceptions.InvalidURL:
-        	print('Handle INVALID URL Exception')
-        	return [],[]
-    	except requests.exceptions.ChunkedEncodingError:
-        	print('Handle CHUNKED ENCODING ERROR Exception')
-        	return [],[]
-    	except requests.exceptions.ContentDecodingError:
-        	print('Handle CHUNKED ENCODING ERROR Exception')
-        	return [],[]
+	except requests.exceptions.ContentDecodingError:
+		print('Handle CONTENT DECODING Exception')
+		return [],[]
+	except requests.exceptions.InvalidURL:
+		print('Handle INVALIDURL Exception')
+		return [],[]
+	except requests.exceptions.ChunkedEncodingError:
+		print('Handle CHUNKING ENCODING Exception')
+		return [],[]
 
 	data = page.text
 	soup = BeautifulSoup(data)
