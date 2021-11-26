@@ -6,6 +6,10 @@ Python libraries to install:
 Numpy
 Pandas
 Pyspark
+Scapy
+Kafka-python
+
+Any missing dependancy should be easily installed with pip3 i.e. "pip3 install dependancy"
 
 To run the code in this project PySpark must be installed correctly on your machine. Following the instructions here can be helpful: https://www.datacamp.com/community/tutorials/installation-of-pyspark?fbclid=IwAR34jVsMn_GuscJTadoQBakhfuQwTTfIYzovzNO-_J5lCWhsXYdw3I0WFhE
 
