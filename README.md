@@ -13,33 +13,33 @@ Any missing dependancy should be easily installed with pip3 i.e. "pip3 install d
 
 To run the model code in this project PySpark must be installed correctly on your machine. Following the instructions here can be helpful: https://www.datacamp.com/community/tutorials/installation-of-pyspark?fbclid=IwAR34jVsMn_GuscJTadoQBakhfuQwTTfIYzovzNO-_J5lCWhsXYdw3I0WFhE
 
-To run the full stack, i.e. Kafka, the model, elasticsearch, and kibana, the ELK stack must be correctly configured
-
+**To run the full stack, i.e. Kafka, the model, elasticsearch, and kibana, the ELK stack must be correctly configured
+**
 It's assumed that zookeeper and kafka are running in the localhost, it follows this process (after downloading Kafka and opening a terminal in the directory):
 
-First RUN (In one terminal, leave it running):
+**First RUN (In one terminal, leave it running):**
 
 bin/zookeeper-server-start.sh config/zookeeper.properties
 
-Then (In a second terminal, leave it running):
+**Then (In a second terminal, leave it running):**
 
 bin/kafka-server-start.sh config/server.properties
 
-Then create both topics (In a third terminal, run these one at a time):
+**Then create both topics (In a third terminal, run these one at a time):**
 
 ./bin/kafka-topics.sh --create --topic transactions --bootstrap-server localhost:9092 --replication-factor 1 --partitions 3
 
 ./bin/kafka-topics.sh --create --topic anomalies --bootstrap-server localhost:9092 --create --partitions 3 --replication-factor 1
 
-Check to see if topics were created
+**Check to see if topics were created**
 
 ./bin/kafka-topics.sh --bootstrap-server localhost:9092 --list
 
-To delete topics
+**To delete topics**
 
 ./bin/kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic anomalies ./bin/kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic transactions
 
-Next download elasticsearch and logstash - make sure elasticsearch and logstash are the EXACT same version
+**Next download elasticsearch and logstash - make sure elasticsearch and logstash are the EXACT same version**
 
 Debug elasticsearch
 
@@ -47,11 +47,11 @@ jps | grep Elasticsearch
 
 kill -SIGTERM "elastic search PID"
 
-Logstash
+**Logstash**
 
 logstash-7.13.0/bin/logstash -f kafka_input.conf
 
-If you dont see indexes in kibana go to stack management refresh fields
+Then run kibana - If you dont see indexes in kibana go to stack management refresh fields
 
 Structure of repository:
 Inside SEG4910Capstone folder is where our code for running our models is.
