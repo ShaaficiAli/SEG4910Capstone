@@ -71,6 +71,8 @@ def querysniff(pkt):
 			+ ', "Number of Labels"' + ":" + str(getLabelNum(query)) 
 			+ ', "Length of domain"' + ":" + str(getLengthDomain(query)) + "}" + "'")
 
+            
+
 
 sniff(iface = interface, filter = "port 53", prn = querysniff, store = 0)
 

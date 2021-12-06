@@ -56,42 +56,18 @@ def detect():
         # Message that came from producer
         record = json.loads(message.value().decode('utf-8'))
         #DROP WEBSITE
-        data = record["data"]
-        
-        #formatted = [[int(data[0]["Length"])],[int(data[0]["Subdomain length"])],[int(data[0]["Uppercase count"])],
-        #    [int(data[0]["Lowercase count"])],[int(data[0]["Numeric count"])],[float(data[0]["Entropy"])],
-        #    [int(data[0]["Length"])],[int(data[0]["Special Char Count"])],[int(data[0]["Max label length"])],
-        #    [int(data[0]["Average label length"])],[int(data[0]["Number of Labels"])],[int(data[0]["Number of Labels"])],
-        #    [int(data[0]["Length of domain"])]]
+        data = record["data"][0]
 
-        x = format(data)
-        prediction = model.predict(x)
+        data2 = list(data.values())
+        data2 = data2[:-1]
 
+        print(data2)
+        prediction = model.predict([data2])
 
-        """
-        # If an anomaly comes in, send it to anomalies topic
-        if prediction[0] == -1:
-            #replace clf with model
-            score = clf.score_samples(data)
-            record["score"] = np.round(score, 3).tolist()
-
-            _id = str(record["id"])
-            record = json.dumps(record).encode("utf-8")
-
-            producer.produce(topic=ANOMALIES_TOPIC,
-                             value=record)
-            producer.flush()
-
-            #record = {"id": _id, "data": df_json_data, "Website": str(df_website.iloc[0]), "Timestamp": current_time}
-        """
-        #prediction = 1
-
-        x2 = x[0]
-        data_string = ' '.join(map(str, x2))
+        data_string = ' '.join(map(str, data2))
 
         record2 = str(record["id"]) + " " + str(prediction[0]) + " " + data_string + " " + str(record["Website"])
         
-        #new_record = {"id": record["id"], "prediction": str(prediction[0]), "data": record["data"],"website": record["Website"], "timestamp": record["Timestamp"]}
         new_record = json.dumps(record2).encode("utf-8")
 
         print(prediction)

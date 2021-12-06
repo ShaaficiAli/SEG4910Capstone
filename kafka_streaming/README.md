@@ -1,12 +1,8 @@
-# kafkaml-dns-detection
+# kafkaml-dns detection
+
+Project for real time anomaly detection using kafka and python
 
 It's assumed that zookeeper and kafka are running in the localhost, it follows this process:
-
-# Demo
-
-Producer and anomaly detection running at the same time
-
-# Kafka set up
 
 First RUN 
 
@@ -18,9 +14,9 @@ bin/kafka-server-start.sh config/server.properties
 
 The create first topic 
 
-kafka-topics.sh --create --topic transactions --bootstrap-server localhost:9092 --replication-factor 1 --partitions 3 
+./bin/kafka-topics.sh --create --topic transactions --bootstrap-server localhost:9092 --replication-factor 1 --partitions 3 
 
-kafka-topics.sh --create --topic anomalies --bootstrap-server localhost:9092 --create --partitions 3 --replication-factor 1
+./bin/kafka-topics.sh --create --topic anomalies --bootstrap-server localhost:9092 --create --partitions 3 --replication-factor 1
 
 Check to see if topics were created 
 
@@ -32,44 +28,16 @@ To delete topics
 ./bin/kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic transactions 
 
 
+Make sure elasticsearch and logstash are the EXACT same version 
 
-# Usage:
+Debug elasticsearch
 
-* First train the anomaly detection model, run the file:
+jps | grep Elasticsearch
 
-```bash
-model/train.py
-```
+kill -SIGTERM "elastic search PID"
 
-* Create the required topics
+Logstash 
 
-```bash
-kafka-topics.sh --zookeeper localhost:2181 --topic transactions --create --partitions 3 --replication-factor 1
-kafka-topics.sh --zookeeper localhost:2181 --topic anomalies --create --partitions 3 --replication-factor 1
-```
+logstash-7.13.0/bin/logstash -f kafka_input.conf
 
-* Check the topics are created
-
-```bash
-kafka-topics.sh --zookeeper localhost:2181 --list
-```
-
-* Check file **settings.py** and edit the variables if needed
-
-* Start the producer, run the file
-
-```bash
-streaming/producer.py
-```
-
-* Start the anomalies detector, run the file
-
-```bash
-streaming/anomalies_detector.py
-```
-
-* start connection to second broker
-
-```bash
-streaming/bot_alerts.py
-```
+If you dont see indexes in kibana go to stack management refresh fields

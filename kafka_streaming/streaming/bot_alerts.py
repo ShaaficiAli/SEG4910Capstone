@@ -8,6 +8,7 @@ from utils import create_consumer
 consumer = create_consumer(topic=ANOMALIES_TOPIC, group_id=ANOMALIES_CONSUMER_GROUP)
 
 while True:
+    print("Test")
     message = consumer.poll()
     print(message)
     if message is None:
@@ -30,6 +31,6 @@ while True:
         print(e.response["error"])
      """
 
-    consumer.commit()
+    #consumer.commit()
 
 consumer.close()
